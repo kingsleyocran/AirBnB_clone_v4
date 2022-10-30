@@ -25,7 +25,7 @@ def close_db(error):
     storage.close()
 
 
-@app.route('/4-hbnb')
+@app.route('/100-hbnb')
 def hbnb_filters(the_id=None):
     """
     handles request to custom template with states, cities & amentities
@@ -36,14 +36,15 @@ def hbnb_filters(the_id=None):
     places = storage.all('Place').values()
     users = dict([user.id, "{} {}".format(user.first_name, user.last_name)]
                  for user in storage.all('User').values())
-    return render_template('4-hbnb.html',
+    return render_template('100-hbnb.html',
                            cache_id=uuid.uuid4(),
-                           states=states,
+                           states=state_objs,
                            amens=amens,
                            places=places,
                            users=users)
 
 
 if __name__ == "__main__":
-    """MAIN Flask App"""
+    """
+    MAIN Flask App"""
     app.run(host=host, port=port)
